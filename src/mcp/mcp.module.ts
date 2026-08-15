@@ -1,7 +1,10 @@
 import { Module } from '@nestjs/common';
-import { McpService } from './mcp.service';
+import { McpServerService } from './mcp.service';
+import { TasksModule } from 'src/tasks/tasks.module';
 
 @Module({
-  providers: [McpService]
+  providers: [McpServerService],
+  exports: [McpServerService],
+  imports: [TasksModule],
 })
-export class McpModule {}
+export class McpModule { }
