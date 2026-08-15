@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { z } from 'zod';
@@ -8,7 +8,7 @@ import { TasksService } from '../tasks/tasks.service';
 export class McpServerService {
     private server: McpServer;
 
-    constructor(private readonly tasksService: TasksService) {
+    constructor(@Inject(TasksService) private readonly tasksService: TasksService) {
         this.server = new McpServer({
             name: 'nestjs-task-mcp-server',
             version: '0.1.0',
